@@ -1,11 +1,6 @@
-# .htaccess — Stronger bot blocking for Apache servers
-# Place this file in your website root directory.
-# It works alongside robots.txt (which is voluntary) to actively block bots.
-
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Block requests with empty or suspicious User-Agent strings
     RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
     RewriteCond %{HTTP_USER_AGENT} ^(curl|wget|python-requests|scrapy|httpclient|java|okhttp|go-http-client) [NC,OR]
     RewriteCond %{HTTP_USER_AGENT} (bot|crawler|spider|scraper|slurp|crawl) [NC,OR]
@@ -13,7 +8,6 @@
     RewriteRule ^ - [F,L]
 </IfModule>
 
-# Block access to sensitive files from all visitors
 <FilesMatch "(^\.|\.bak$|\.log$|\.sql$|\.zip$|\.tar$|\.gz$)">
     Require all denied
 </FilesMatch>
